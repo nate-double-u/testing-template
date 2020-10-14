@@ -1,4 +1,4 @@
-title = "Hugo Netlify Starter"
+title = "Testing Deployment -> Hugo Netlify Starter"
 disableKinds = ["taxonomy", "taxonomyTerm"]
 copyright = "Cloud Native Computing Foundation"
 
