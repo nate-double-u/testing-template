@@ -13,7 +13,7 @@ A *Pod* is the basic execution unit of a Kubernetes application--the smallest an
 
 A Pod encapsulates an application's container (or, in some cases, multiple containers), storage resources, a unique network IP, and options that govern how the container(s) should run. Here's some `code highlights interspersed with text`. A Pod represents a unit of deployment: *a single instance of an application in Kubernetes*, which might consist of either a single container or a small number of containers that are tightly coupled and that share resources.
 
-[Docker](https://www.docker.com) is the most common container runtime used in a Kubernetes Pod, but Pods support other [container runtimes](/docs/setup/production-environment/container-runtimes/) as well.
+[Docker](https://www.docker.com) is the most common container runtime used in a Kubernetes Pod, but Pods support other container runtimes as well.
 
 This is a test table:
 
@@ -40,9 +40,7 @@ Each Pod is meant to run a single instance of a given application. If you want t
 
 Pods are designed to support multiple cooperating processes (as containers) that form a cohesive unit of service. The containers in a Pod are automatically co-located and co-scheduled on the same physical or virtual machine in the cluster. The containers can share resources and dependencies, communicate with one another, and coordinate when and how they are terminated.
 
-Note that grouping multiple co-located and co-managed containers in a single Pod is a relatively advanced use case. You should use this pattern only in specific instances in which your containers are tightly coupled. For example, you might have a container that acts as a web server for files in a shared volume, and a separate "sidecar" container that updates those files from a remote source, as in the following diagram:
-
-{{< figure src="/images/docs/pod.svg" alt="example pod diagram" width="50%" >}}
+Note that grouping multiple co-located and co-managed containers in a single Pod is a relatively advanced use case. You should use this pattern only in specific instances in which your containers are tightly coupled. For example, you might have a container that acts as a web server for files in a shared volume, and a separate "sidecar" container that updates those files from a remote source.
 
 Some Pods have init containers as well as app containers. Init containers run and complete before the app containers are started.
 
@@ -58,7 +56,7 @@ Each Pod is assigned a unique IP address. Every container in a Pod shares the ne
 
 #### Storage
 
-A Pod can specify a set of shared storage volume. All containers in the Pod can access the shared volumes, allowing those containers to share data. Volumes also allow persistent data in a Pod to survive in case one of the containers within needs to be restarted. See [Volumes](/docs/concepts/storage/volumes/) for more information on how Kubernetes implements shared storage in a Pod.
+A Pod can specify a set of shared storage volume. All containers in the Pod can access the shared volumes, allowing those containers to share data. Volumes also allow persistent data in a Pod to survive in case one of the containers within needs to be restarted.
 
 ## Working with Pods
 
@@ -74,19 +72,15 @@ A Controller can create and manage multiple Pods for you, handling replication a
 
 Some examples of Controllers that contain one or more pods include:
 
-* [Deployment](/docs/concepts/workloads/controllers/deployment/)
-* [StatefulSet](/docs/concepts/workloads/controllers/statefulset/)
-* [DaemonSet](/docs/concepts/workloads/controllers/daemonset/)
+* Deployment
+* StatefulSet
+* DaemonSet
 
 In general, Controllers use a Pod Template that you provide to create the Pods for which it is responsible.
 
 ## Pod Templates
 
-Pod templates are pod specifications which are included in other objects, such as
-[Replication Controllers](/docs/concepts/workloads/controllers/replicationcontroller/), [Jobs](/docs/concepts/jobs/run-to-completion-finite-workloads/), and
-[DaemonSets](/docs/concepts/workloads/controllers/daemonset/).  Controllers use Pod Templates to make actual pods.
-The sample below is a simple manifest for a Pod which contains a container that prints
-a message.
+Pod templates are pod specifications which are included in other objects, such as Replication Controllers, Jobs, and DaemonSets.  Controllers use Pod Templates to make actual pods.  The sample below is a simple manifest for a Pod which contains a container that prints a message.
 
 ```yaml
 apiVersion: v1
